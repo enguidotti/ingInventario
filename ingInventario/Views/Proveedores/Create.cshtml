@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Crear Proveedor";
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <h2>Crear Proveedor</h2>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox-title">
+                <h3>Ingrese los datos del proveedor a crear</h3>
+            </div>
+            <div class="ibox-content">
+                <form method="post" action="@Url.Action("Create","Proveedores")">
+                    <div class="form-group row">
+                        <label class="col-2 text-right">Run:</label>
+                        <div class="col-10">
+                            <input type="text" name="rut" id="rut" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 text-right">Nombre:</label>
+                        <div class="col-10">
+                            <input type="text" name="nombre" id="nombre" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 text-right">Teléfono:</label>
+                        <div class="col-10">
+                            <input type="text" name="fono" id="fono" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 text-right">Email:</label>
+                        <div class="col-10">
+                            <input type="email" name="email" id="email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 text-right">Email:</label>
+                        <div class="col-10">
+                            <textarea name="comentario" id="comentario" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" value="Guardar" id="guardar" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  
+</script>
