@@ -81,7 +81,7 @@
           <Property Name="id_proveedor" Type="int" Nullable="false" />
           <Property Name="id_categoria" Type="int" Nullable="false" />
           <Property Name="id_marca" Type="int" Nullable="false" />
-          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="int" />
         </EntityType>
         <EntityType Name="ProductoBodega">
           <Key>
@@ -266,7 +266,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -442,7 +442,7 @@
           <Property Name="comentario" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="num_factura" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DetalleEntrada" Relationship="Self.FK_DetalleEntrada_OrdenEntrada" FromRole="OrdenEntrada" ToRole="DetalleEntrada" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_OrdenEntrada_Usuario" FromRole="OrdenEntrada" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="inventariodbModel.FK_OrdenEntrada_Usuario" FromRole="OrdenEntrada" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="OrdenSalida">
           <Key>
@@ -453,9 +453,9 @@
           <Property Name="user_entrega" Type="Int32" Nullable="false" />
           <Property Name="user_pide" Type="Int32" Nullable="false" />
           <Property Name="comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_OrdenSalida_Usuario" FromRole="OrdenSalida" ToRole="Usuario" />
-          <NavigationProperty Name="Usuario1" Relationship="Self.FK_OrdenSalida_Usuario1" FromRole="OrdenSalida" ToRole="Usuario" />
           <NavigationProperty Name="DatalleSalida" Relationship="inventariodbModel.FK_DatalleSalida_OrdenSalida" FromRole="OrdenSalida" ToRole="DatalleSalida" />
+          <NavigationProperty Name="Usuario" Relationship="inventariodbModel.FK_OrdenSalida_Usuario" FromRole="OrdenSalida" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="inventariodbModel.FK_OrdenSalida_Usuario1" FromRole="OrdenSalida" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -470,13 +470,13 @@
           <Property Name="id_proveedor" Type="Int32" Nullable="false" />
           <Property Name="id_categoria" Type="Int32" Nullable="false" />
           <Property Name="id_marca" Type="Int32" Nullable="false" />
-          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="Int32" />
           <NavigationProperty Name="Categoria" Relationship="Self.FK_Producto_Categoria" FromRole="Producto" ToRole="Categoria" />
           <NavigationProperty Name="DetalleEntrada" Relationship="Self.FK_DetalleEntrada_Producto" FromRole="Producto" ToRole="DetalleEntrada" />
           <NavigationProperty Name="Marca" Relationship="Self.FK_Producto_Marca" FromRole="Producto" ToRole="Marca" />
           <NavigationProperty Name="Proveedor" Relationship="Self.FK_Producto_Proveedor" FromRole="Producto" ToRole="Proveedor" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Producto_Usuario" FromRole="Producto" ToRole="Usuario" />
           <NavigationProperty Name="ProductoBodega" Relationship="Self.FK_ProductoBodega_Producto" FromRole="Producto" ToRole="ProductoBodega" />
+          <NavigationProperty Name="Usuario" Relationship="inventariodbModel.FK_Producto_Usuario" FromRole="Producto" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="ProductoBodega">
           <Key>
@@ -519,25 +519,7 @@
           </Key>
           <Property Name="id_tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="id_usuario" />
-          </Key>
-          <Property Name="id_usuario" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rut" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="id_tipo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrdenEntrada" Relationship="Self.FK_OrdenEntrada_Usuario" FromRole="Usuario" ToRole="OrdenEntrada" />
-          <NavigationProperty Name="OrdenSalida" Relationship="Self.FK_OrdenSalida_Usuario" FromRole="Usuario" ToRole="OrdenSalida" />
-          <NavigationProperty Name="OrdenSalida1" Relationship="Self.FK_OrdenSalida_Usuario1" FromRole="Usuario" ToRole="OrdenSalida" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Usuario" FromRole="Usuario" ToRole="Producto" />
-          <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="Usuario" Relationship="inventariodbModel.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
         </EntityType>
         <Association Name="FK_Bodega_Sucursal">
           <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
@@ -611,42 +593,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrdenEntrada_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="OrdenEntrada" Type="Self.OrdenEntrada" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="OrdenEntrada">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrdenSalida_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="OrdenSalida" Type="Self.OrdenSalida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="OrdenSalida">
-              <PropertyRef Name="user_entrega" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrdenSalida_Usuario1">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="OrdenSalida" Type="Self.OrdenSalida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="OrdenSalida">
-              <PropertyRef Name="user_pide" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Producto_Proveedor">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
           <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
@@ -656,18 +602,6 @@
             </Principal>
             <Dependent Role="Producto">
               <PropertyRef Name="id_proveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Producto_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="id_user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -683,18 +617,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_TipoUsuario">
-          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoUsuario">
-              <PropertyRef Name="id_tipo" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="id_tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="inventariodbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bodega" EntityType="Self.Bodega" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
@@ -707,7 +629,6 @@
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
           <EntitySet Name="Sucursal" EntityType="Self.Sucursal" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <AssociationSet Name="FK_Bodega_Sucursal" Association="Self.FK_Bodega_Sucursal">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="Bodega" EntitySet="Bodega" />
@@ -732,33 +653,13 @@
             <End Role="Marca" EntitySet="Marca" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrdenEntrada_Usuario" Association="Self.FK_OrdenEntrada_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="OrdenEntrada" EntitySet="OrdenEntrada" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrdenSalida_Usuario" Association="Self.FK_OrdenSalida_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="OrdenSalida" EntitySet="OrdenSalida" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrdenSalida_Usuario1" Association="Self.FK_OrdenSalida_Usuario1">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="OrdenSalida" EntitySet="OrdenSalida" />
-          </AssociationSet>
           <AssociationSet Name="FK_Producto_Proveedor" Association="Self.FK_Producto_Proveedor">
             <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Producto_Usuario" Association="Self.FK_Producto_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductoBodega_Producto" Association="Self.FK_ProductoBodega_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="ProductoBodega" EntitySet="ProductoBodega" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
-            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
-            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <EntitySet Name="DatalleSalida" EntityType="inventariodbModel.DatalleSalida" />
           <AssociationSet Name="FK_DatalleSalida_OrdenSalida" Association="inventariodbModel.FK_DatalleSalida_OrdenSalida">
@@ -768,6 +669,27 @@
           <AssociationSet Name="FK_DatalleSalida_ProductoBodega" Association="inventariodbModel.FK_DatalleSalida_ProductoBodega">
             <End Role="ProductoBodega" EntitySet="ProductoBodega" />
             <End Role="DatalleSalida" EntitySet="DatalleSalida" />
+          </AssociationSet>
+          <EntitySet Name="Usuario" EntityType="inventariodbModel.Usuario" />
+          <AssociationSet Name="FK_OrdenEntrada_Usuario" Association="inventariodbModel.FK_OrdenEntrada_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="OrdenEntrada" EntitySet="OrdenEntrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenSalida_Usuario" Association="inventariodbModel.FK_OrdenSalida_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="OrdenSalida" EntitySet="OrdenSalida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenSalida_Usuario1" Association="inventariodbModel.FK_OrdenSalida_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="OrdenSalida" EntitySet="OrdenSalida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Usuario" Association="inventariodbModel.FK_Producto_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="inventariodbModel.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="DatalleSalida">
@@ -802,6 +724,84 @@
             </Principal>
             <Dependent Role="DatalleSalida">
               <PropertyRef Name="id_stock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rut" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrdenEntrada" Relationship="inventariodbModel.FK_OrdenEntrada_Usuario" FromRole="Usuario" ToRole="OrdenEntrada" />
+          <NavigationProperty Name="OrdenSalida" Relationship="inventariodbModel.FK_OrdenSalida_Usuario" FromRole="Usuario" ToRole="OrdenSalida" />
+          <NavigationProperty Name="OrdenSalida1" Relationship="inventariodbModel.FK_OrdenSalida_Usuario1" FromRole="Usuario" ToRole="OrdenSalida" />
+          <NavigationProperty Name="Producto" Relationship="inventariodbModel.FK_Producto_Usuario" FromRole="Usuario" ToRole="Producto" />
+          <NavigationProperty Name="TipoUsuario" Relationship="inventariodbModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+        </EntityType>
+        <Association Name="FK_OrdenEntrada_Usuario">
+          <End Type="inventariodbModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="inventariodbModel.OrdenEntrada" Role="OrdenEntrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="OrdenEntrada">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenSalida_Usuario">
+          <End Type="inventariodbModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="inventariodbModel.OrdenSalida" Role="OrdenSalida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="OrdenSalida">
+              <PropertyRef Name="user_entrega" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenSalida_Usuario1">
+          <End Type="inventariodbModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="inventariodbModel.OrdenSalida" Role="OrdenSalida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="OrdenSalida">
+              <PropertyRef Name="user_pide" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Usuario">
+          <End Type="inventariodbModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="inventariodbModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Type="inventariodbModel.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
+          <End Type="inventariodbModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="id_tipo" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="id_tipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -928,20 +928,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="inventariodbModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="apellido" ColumnName="apellido" />
-                <ScalarProperty Name="rut" ColumnName="rut" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="id_tipo" ColumnName="id_tipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DatalleSalida">
             <EntityTypeMapping TypeName="inventariodbModel.DatalleSalida">
               <MappingFragment StoreEntitySet="DatalleSalida">
@@ -949,6 +935,20 @@
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
                 <ScalarProperty Name="id_stock" ColumnName="id_stock" />
                 <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="inventariodbModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="id_tipo" ColumnName="id_tipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="rut" ColumnName="rut" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

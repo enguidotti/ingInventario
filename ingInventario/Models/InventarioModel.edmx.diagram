@@ -16,23 +16,23 @@
         <EntityTypeShape EntityType="inventariodbModel.Proveedor" Width="1.5" PointX="8" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="inventariodbModel.Sucursal" Width="1.5" PointX="8" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="inventariodbModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="inventariodbModel.Usuario" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="inventariodbModel.FK_Bodega_Sucursal" ManuallyRouted="false" />
         <AssociationConnector Association="inventariodbModel.FK_ProductoBodega_Bodega" ManuallyRouted="false" />
         <AssociationConnector Association="inventariodbModel.FK_Producto_Categoria" ManuallyRouted="false" />
         <AssociationConnector Association="inventariodbModel.FK_DetalleEntrada_OrdenEntrada" ManuallyRouted="false" />
         <AssociationConnector Association="inventariodbModel.FK_DetalleEntrada_Producto" ManuallyRouted="false" />
         <AssociationConnector Association="inventariodbModel.FK_Producto_Marca" ManuallyRouted="false" />
-        <AssociationConnector Association="inventariodbModel.FK_OrdenEntrada_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="inventariodbModel.FK_OrdenSalida_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="inventariodbModel.FK_OrdenSalida_Usuario1" ManuallyRouted="false" />
         <AssociationConnector Association="inventariodbModel.FK_Producto_Proveedor" ManuallyRouted="false" />
-        <AssociationConnector Association="inventariodbModel.FK_Producto_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="inventariodbModel.FK_ProductoBodega_Producto" ManuallyRouted="false" />
-        <AssociationConnector Association="inventariodbModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
         <EntityTypeShape EntityType="inventariodbModel.DatalleSalida" Width="1.5" PointX="14.75" PointY="6.375" />
         <AssociationConnector Association="inventariodbModel.FK_DatalleSalida_OrdenSalida" />
         <AssociationConnector Association="inventariodbModel.FK_DatalleSalida_ProductoBodega" />
+        <EntityTypeShape EntityType="inventariodbModel.Usuario" Width="1.5" PointX="3" PointY="4.75" />
+        <AssociationConnector Association="inventariodbModel.FK_OrdenEntrada_Usuario" />
+        <AssociationConnector Association="inventariodbModel.FK_OrdenSalida_Usuario" />
+        <AssociationConnector Association="inventariodbModel.FK_OrdenSalida_Usuario1" />
+        <AssociationConnector Association="inventariodbModel.FK_Producto_Usuario" />
+        <AssociationConnector Association="inventariodbModel.FK_Usuario_TipoUsuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

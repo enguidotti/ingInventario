@@ -12,7 +12,7 @@
                 <h3>Ingrese los datos del proveedor a crear</h3>
             </div>
             <div class="ibox-content">
-                <form method="post" action="@Url.Action("Create","Productos")">
+                <form method="post">
                     <div class="form-group row">
                         <label class="col-2 text-right">Marca:</label>
                         <div class="col-10">
@@ -65,7 +65,8 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <input type="submit" value="Guardar" id="guardar" class="btn btn-primary" />
+                        <input type="button" value="Limpiar" id="limpiar" class="btn btn-secondary" />
+                        <input type="button" value="Guardar" id="guardar" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
@@ -77,6 +78,7 @@
 <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
     $('#guardar').click(function (e) {
+        e.preventDefault();
         let error = '';
         if (!$('#marca').val())
             error = 'Debe seleccionar marca \n';
@@ -89,14 +91,60 @@
         if ($('#codigo').val().trim() === '')
             error += 'Debe ingresar código \n';
         if (error != '') {
-            e.preventDefault();
             swal('Error validación', error, 'error');
         }
         else
         {
-            //mostrar que se hizo en el layout
-            //se enviarán los datos al controlador a través de ajax
 
+            const data = {
+                id_marca: $('#marca').val(),
+                id_categoria: $('#categoria').val(),
+                id_proveedor: $('#proveedor').val(),
+                nombre: $('#nombre').val().trim(),
+                codigo: $('#codigo').val().trim(),
+                cantidad: $('#cantidad').val(),
+                precio: $('#precio').val(),
+                comentario: $('#comentario').val().trim()
+            }
+            //se enviarán los datos al controlador a través de ajax
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Create")',
+                data: '{producto:' + JSON.stringify(data) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (ok) {
+                    if (ok === '') {
+                        swal({
+                            title: 'Creación Producto',
+                            text: 'Los datos se han guardado con éxito!',
+                            icon: 'success',
+                            button: 'Cerrar',
+                            closeOnClickOutside: false,
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                //location.reload();//recarga la página
+                                limpiar(); // limpiamos los campos
+                            }
+                        });
+                    } else {
+                        swal('Error', ok, 'error');
+                    }
+                }
+            });
         }
     });
+    $('#limpiar').click(function () {
+        limpiar();
+    });
+    function limpiar() {
+        $('#nombre').val('');
+        $('#codigo').val('');
+        $('#cantidad').val('');
+        $('#precio').val('');
+        $('#comentario').val('');
+        $('#marca').val('');
+        $('#categoria').val('');
+        $('#proveedor').val('');
+    }
 </script>

@@ -19,5 +19,20 @@ namespace ingInventario.Controllers
             ViewBag.proveedor = new SelectList(db.Proveedor, "id_proveedor", "nombre");
             return View();
         }
+        [HttpPost]
+        public ActionResult Create(Producto producto)
+        {
+            try
+            {
+                db.Producto.Add(producto);
+                db.SaveChanges();
+                return Json("");
+            }
+            catch (Exception)
+            {
+
+                return Json("Ha ocurrido un error, intentelo más tarde.");
+            }
+        }
     }
 }

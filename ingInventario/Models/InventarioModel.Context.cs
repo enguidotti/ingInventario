@@ -36,7 +36,7 @@ namespace ingInventario.Models
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<DatalleSalida> DatalleSalida { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }
