@@ -137,6 +137,27 @@
     $('#limpiar').click(function () {
         limpiar();
     });
+
+    //verificar si el código existe, blur sirve cuando pierde el foco el input
+    $('#codigo').blur(function () {
+        if ($('#codigo').val().trim() !== '') {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CodigoExiste")',
+                data: '{codigo:' + JSON.stringify($('#codigo').val()) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (ok) {
+                    if (ok !== '') {
+                        swal('El producto existe ' + ok, '', 'warning');
+                        $('#codigo').val('');
+                        $('#codigo').focus();//focus sirve para dejar seleccionado el input
+                    }
+                }
+            });
+        }
+    });
+
     function limpiar() {
         $('#nombre').val('');
         $('#codigo').val('');

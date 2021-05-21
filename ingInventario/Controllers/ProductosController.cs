@@ -34,5 +34,16 @@ namespace ingInventario.Controllers
                 return Json("Ha ocurrido un error, intentelo más tarde.");
             }
         }
+        [HttpPost]
+        public JsonResult CodigoExiste(string codigo)
+        {
+            var q = db.Producto.FirstOrDefault( p => p.codigo.ToLower().Equals(codigo.ToLower()));
+            if(q != null)
+            {
+                string nombre = q.nombre;
+                return Json(nombre);
+            }
+            return Json("");
+        }
     }
 }
