@@ -14,7 +14,7 @@ namespace ingInventario.Controllers
         public ActionResult Create()
         {
             //lista para mostar en el select
-            ViewBag.marca = new SelectList(db.Marca,"id_marca","nombre");
+            ViewBag.marca = new SelectList(db.Marca.OrderBy(m=>m.nombre),"id_marca","nombre");//marcas ordenadas ascendente
             ViewBag.categoria = new SelectList(db.Categoria, "id_categoria", "nombre");
             ViewBag.proveedor = new SelectList(db.Proveedor, "id_proveedor", "nombre");
             return View();
@@ -37,6 +37,7 @@ namespace ingInventario.Controllers
         [HttpPost]
         public JsonResult CodigoExiste(string codigo)
         {
+            //select * from producto p where LOWER(p.codigo) = LOWER(codigo)
             var q = db.Producto.FirstOrDefault( p => p.codigo.ToLower().Equals(codigo.ToLower()));
             if(q != null)
             {
@@ -45,5 +46,22 @@ namespace ingInventario.Controllers
             }
             return Json("");
         }
+
+        public ActionResult Index()
+        {
+            var productos = db.Producto.ToList();
+
+            return View(productos);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            //select * from producto 
+            var producto = db.Producto.Find(id);
+                                               //lista         value          text     opción seleccionada
+            ViewBag.proveedor = new SelectList(db.Proveedor, "id_proveedor", "nombre",producto.id_proveedor);
+            return PartialView("_Edit",producto);
+        }
+
     }
 }

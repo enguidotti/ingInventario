@@ -287,6 +287,8 @@
     <Content Include="Views\Categorias\Index.cshtml" />
     <Content Include="Views\Categorias\_Delete.cshtml" />
     <Content Include="Views\Categorias\_Edit.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\Productos\_Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
