@@ -71,6 +71,22 @@ namespace ingInventario.Controllers
             db.SaveChanges();
             return Json("");
         }
-
+        public ActionResult Delete(int id)
+        {
+            var p = db.Producto.Find(id);
+            return PartialView("_Delete",p);
+        }
+        [HttpPost]
+        public ActionResult Eliminar(int id)
+        {
+                var p = db.Producto.Find(id);
+                if (p != null)
+                {
+                    db.Producto.Remove(p);
+                db.SaveChanges();
+                    return Json("");
+                }
+            return Json("No se ha podido eliminar el producto");
+        }
     }
 }

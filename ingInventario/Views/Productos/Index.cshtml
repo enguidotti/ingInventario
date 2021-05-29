@@ -44,6 +44,10 @@
                                             data-url="@Url.Action("Edit","Productos",new { id = item.id_producto })">
                                         <i class="fa fa-edit"></i>Editar
                                     </button>
+                                    <button class="btn btn-danger" data-toggle="modal"
+                                            data-url="@Url.Action("Delete","Productos",new { id = item.id_producto })">
+                                        <i class="fa fa-trash"></i>Eliminar
+                                    </button>
                                 </td>
                             </tr>
                         }
@@ -54,12 +58,22 @@
     </div>
 </div>
 <div class="modal fade" id="modalEdit"></div>
+<div class="modal fade" id="modalDelete"></div>
+<script src="~/Scripts/plugins/dataTables/datatables.min.js"></script>
+<script src="~/Scripts/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
 <script>
     $('.btn-warning').click(function () {
         let url = $(this).data('url');
         $.get(url, function (result) {
             $('#modalEdit').html(result);
             $('#modalEdit').modal('show');
+        });
+    });
+    $('.btn-danger').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function(result) {
+            $('#modalDelete').html(result);
+            $('#modalDelete').modal('show');
         });
     });
 </script>
