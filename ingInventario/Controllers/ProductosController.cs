@@ -50,9 +50,11 @@ namespace ingInventario.Controllers
 
         public ActionResult Index()
         {
-            var productos = db.Producto.ToList();
-
-            return View(productos);
+            //permite llevar al helper de razor(select) la lista de marcas 
+            ViewBag.idMarca = new SelectList(db.Marca, "id_marca", "nombre");
+            ViewBag.idCategoria = new SelectList(db.Categoria, "id_categoria", "nombre");
+            ViewBag.idProveedor = new SelectList(db.Proveedor, "id_proveedor", "nombre");
+            return View();
         }
 
         public ActionResult Edit(int id)
@@ -87,6 +89,26 @@ namespace ingInventario.Controllers
                     return Json("");
                 }
             return Json("No se ha podido eliminar el producto");
+        }
+        //método para acceder a vista parcial que muestra los productos
+        public ActionResult ListaProducto(int? marca, int? categoria, int? proveedor)
+        {
+            var productos = db.Producto.ToList();
+            
+            if(marca != null)
+            {
+                //SELECT * FROM PRODUCTO p WHERE p.id_marca == 1 && categoria == 1 && proveedor == 1
+                productos = productos.Where(p => p.id_marca == marca).ToList();
+            }
+            if(categoria != null)
+            {
+                productos = productos.Where(p => p.id_categoria == categoria).ToList();
+            }
+            if(proveedor != null)
+            {
+                productos = productos.Where(p => p.id_proveedor == proveedor).ToList();
+            }
+            return PartialView("_ListaProducto", productos);
         }
     }
 }

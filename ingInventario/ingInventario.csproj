@@ -290,6 +290,7 @@
     <Content Include="Views\Productos\Index.cshtml" />
     <Content Include="Views\Productos\_Edit.cshtml" />
     <Content Include="Views\Productos\_Delete.cshtml" />
+    <Content Include="Views\Productos\_ListaProducto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

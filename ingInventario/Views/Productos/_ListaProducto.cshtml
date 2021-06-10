@@ -1,0 +1,56 @@
+﻿<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Marca</th>
+            <th>Categoría</th>
+            <th>Proveedor</th>
+            <th>Producto</th>
+            <th>Código</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Comentario</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Marca.nombre</td>
+                <td>@item.Categoria.nombre</td>
+                <td>@item.Proveedor.nombre</td>
+                <td>@item.nombre</td>
+                <td>@item.codigo</td>
+                <td>@item.cantidad</td>
+                <td>@item.precio</td>
+                <td>@item.comentario</td>
+                <td>
+                    <button class="btn btn-warning" data-toggle="modal"
+                            data-url="@Url.Action("Edit","Productos",new { id = item.id_producto })">
+                        <i class="fa fa-edit"></i>Editar
+                    </button>
+                    <button class="btn btn-danger" data-toggle="modal"
+                            data-url="@Url.Action("Delete","Productos",new { id = item.id_producto })">
+                        <i class="fa fa-trash"></i>Eliminar
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $('.btn-warning').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function (result) {
+            $('#modalEdit').html(result);
+            $('#modalEdit').modal('show');
+        });
+    });
+    $('.btn-danger').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function (result) {
+            $('#modalDelete').html(result);
+            $('#modalDelete').modal('show');
+        });
+    });
+</script>
