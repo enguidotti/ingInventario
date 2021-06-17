@@ -68,15 +68,15 @@
         pageLength: 25,
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
-            { extend: 'excel', title: 'Productos', exportOptions: { modifier: { page: 'all', search: 'none' } } },
+            { extend: 'excel', title: 'Marcas', exportOptions: { modifier: { page: 'all', search: 'none' } } },
             {
-                extend: 'pdf', title: 'Productos', exportOptions: { modifier: { page: 'all', search: 'none' } }
+                extend: 'pdf', title: 'Marcas', exportOptions: { modifier: { page: 'all', search: 'none' } }
             },
 
             {
                 extend: 'print',
                 text: 'Imprimir',
-                messageTop: 'Comercial Ruiz',
+                messageTop: 'Sistema Inventario',
                 customize: function (win) {
                     $(win.document.body).addClass('white-bg');
                     $(win.document.body).css('font-size', '10px');
