@@ -12,7 +12,7 @@
                 <h2>Lista de marcas</h2>
             </div>
             <div class="ibox-content">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="tabla">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -50,6 +50,9 @@
 <div class="modal fade" id="modalDelete">
     <!-- EN ESTA PARTE SE CARGARÁ LA VISTA PARCIAL DEL ELIMINAR-->
 </div>
+<link href="~/Content/plugins/dataTables/datatables.min.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/dataTables/datatables.min.js"></script>
+<script src="~/Scripts/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
 <script>
     //# accedo a los elementos por id,
     //. accede a los elementos por la clase
@@ -61,6 +64,57 @@
             $('#modalEdit').modal('show');
         });
     });
+    $('#tabla').DataTable({
+        pageLength: 25,
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+            { extend: 'excel', title: 'Productos', exportOptions: { modifier: { page: 'all', search: 'none' } } },
+            {
+                extend: 'pdf', title: 'Productos', exportOptions: { modifier: { page: 'all', search: 'none' } }
+            },
+
+            {
+                extend: 'print',
+                text: 'Imprimir',
+                messageTop: 'Comercial Ruiz',
+                customize: function (win) {
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                        .addClass('compact')
+                        .css('font-size', 'inherit');
+                }
+            }
+        ],
+        order: [[1, "desc"]],
+        language:
+        {
+            sProcessing: "Procesando...",
+            sLengthMenu: "Mostrar _MENU_ registros",
+            sZeroRecords: "No se encontraron resultados",
+            sEmptyTable: "Ningún dato disponible en esta tabla",
+            sInfo: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            sInfoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+            sInfoPostFix: "",
+            sSearch: "Buscar:",
+            sUrl: "",
+            sInfoThousands: ",",
+            sLoadingRecords: "Cargando...",
+            oPaginate: {
+                sFirst: "Primero",
+                sLast: "Último",
+                sNext: "Siguiente",
+                sPrevious: "Anterior"
+            },
+            oAria: {
+                sSortAscending: ": Activar para ordenar la columna de manera ascendente",
+                sSortDescending: ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    });
+
     //se accede a la clase del botón Eliminar
     $('.btn-danger').click(function () {
         let url = $(this).data('url');

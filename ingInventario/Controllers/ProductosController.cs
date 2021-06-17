@@ -93,8 +93,8 @@ namespace ingInventario.Controllers
         //método para acceder a vista parcial que muestra los productos
         public ActionResult ListaProducto(int? marca, int? categoria, int? proveedor)
         {
-            var productos = db.Producto.ToList();
-            
+            var productos = db.Producto.ToList();    
+        
             if(marca != null)
             {
                 //SELECT * FROM PRODUCTO p WHERE p.id_marca == 1 && categoria == 1 && proveedor == 1
