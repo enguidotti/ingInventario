@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
+    <Compile Include="Controllers\OrdenEntradasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Global.asax.cs">
@@ -290,6 +291,7 @@
     <Content Include="Views\Productos\_Edit.cshtml" />
     <Content Include="Views\Productos\_Delete.cshtml" />
     <Content Include="Views\Productos\_ListaProducto.cshtml" />
+    <Content Include="Views\OrdenEntradas\OrdenEntrada.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
