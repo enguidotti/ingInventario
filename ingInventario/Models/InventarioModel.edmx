@@ -124,7 +124,7 @@
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
-          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rut" Type="varchar" MaxLength="13" Nullable="false" />
@@ -456,7 +456,7 @@
           <NavigationProperty Name="DatalleSalida" Relationship="inventariodbModel.FK_DatalleSalida_OrdenSalida" FromRole="OrdenSalida" ToRole="DatalleSalida" />
           <NavigationProperty Name="Usuario" Relationship="inventariodbModel.FK_OrdenSalida_Usuario" FromRole="OrdenSalida" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="inventariodbModel.FK_OrdenSalida_Usuario1" FromRole="OrdenSalida" ToRole="Usuario" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Producto">
           <Key>
             <PropertyRef Name="id_producto" />
@@ -731,7 +731,7 @@
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
-          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="rut" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />

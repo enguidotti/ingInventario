@@ -1,18 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "OrdenEntrada";
+    ViewBag.Title = "Orden Entrada";
 }
-
-@*<div class="row wrapper border-bottom white-bg page-heading">
-    <h2>Entrada de Stock</h2>
-</div>*@
-
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox-title">
-                <h3>Ingrese los datos de la categoría a crear</h3>
+                <h3>Ingrese los datos para agregar productos al stock</h3>
             </div>
             <div class="ibox-content">
                 <div class="form-group row">
@@ -35,7 +30,7 @@
                     </div>
                     <label class="col-sm-1"> Cantidad:</label>
                     <div class="col-sm-1">
-                        <input type="number" class="form-control" id="cantidad"/>
+                        <input type="number" class="form-control solonumeros" id="cantidad"/>
                     </div>
                     <input type="button" id="agregar" value="Agregar" class="btn btn-primary"/>
                 </div>
@@ -61,6 +56,9 @@
 </div>
 <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
+    $('.solonumeros').on('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
     let idProducto = 0;
     let datos = [];//arreglo para guardar los productos que se vayan agregando
     //ingresando código verifica si el producto existe, trae id_producto y nombre producto 
@@ -82,6 +80,7 @@
         }
     });
     $('#guardar').click(function () {
+        //validación de datos
         let error = '';
         if ($('#numFact').val() == '')
             error = 'Debe ingresar número de factura \n';
@@ -101,7 +100,19 @@
                 dataType: 'json',
                 contentType: 'application/json;charset=utf-8',
                 success: function (resp) {
-                    
+                    if (resp == '') {
+                        swal({
+                            title: 'Ingreso',
+                            text: 'Los datos se han guardado con éxito!',
+                            icon: 'success',
+                            button: 'Cerrar',
+                            closeOnClickOutside: false,
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();//recarga la página                               
+                            }
+                        });
+                    }
                 }
 
             });
@@ -110,6 +121,7 @@
     //*****TABLA DE PRODUCTOS*****//
     //agregar productos al arreglo
     $('#agregar').click(function () {
+        //validación que verifica si los datos requeridos están ingresados
         let error = '';
         if ($('#nombre').val().trim() == '')
             error = 'Debe ingresar un producto \n';
@@ -118,6 +130,7 @@
         if (error != '')
             swal('Error', error, 'warning');
         else {
+            //creamos un formato para asignarle los valores al arreglo
             const modelo = {
                 id_producto: idProducto,
                 codigo: $('#codigo').val(),
@@ -126,6 +139,7 @@
             };
             //Pregunta si el arreglo tiene datos
             let x = 0;
+            //verifica si el arreglo datos contiene algun producto o no
             if (datos.length > 0) {
                 //si tiendas reccore el arreglo para verificar si el producto existe en el arreglo
                 for (let i = 0; i < datos.length; i++) {
