@@ -57,5 +57,30 @@ namespace ingInventario.Controllers
             }
             return Json("");
         }
+
+        public ActionResult HistorialEntradas()
+        {
+            return View();
+        }
+        
+        public ActionResult Ordenes(DateTime? inicio, DateTime? fin)
+        {
+            //consulta con las ordenes de entrada
+            var orden = db.OrdenEntrada.ToList();
+            if (inicio != null)
+            {
+                //filtro por fechas
+                orden = orden.Where(o => o.fecha >= inicio && o.fecha <= fin).ToList();
+            }
+            //retornar la vista parcial y el modelo
+            return PartialView("_Ordenes", orden);
+        }
+
+        //mostrar detalle de la orden
+        public ActionResult DetalleOrden(int id)
+        {
+            var detalle = db.OrdenEntrada.Find(id);
+            return View(detalle);
+        }
     }
 }

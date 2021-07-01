@@ -115,6 +115,7 @@
     <Content Include="Content\patterns\triangular.png" />
     <Content Include="Content\plugins\datapicker\datepicker3.css" />
     <Content Include="Content\plugins\dataTables\datatables.min.css" />
+    <Content Include="Content\plugins\daterangepicker.css" />
     <Content Include="Content\plugins\select2\select2.min.css" />
     <Content Include="Content\plugins\sweetalert\sweetalert.css" />
     <Content Include="Content\style.css" />
@@ -140,6 +141,7 @@
     <Content Include="Scripts\plugins\datapicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\plugins\dataTables\dataTables.bootstrap4.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
+    <Content Include="Scripts\plugins\daterangepicker.js" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_555555_256x240.png" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_777620_256x240.png" />
@@ -292,6 +294,9 @@
     <Content Include="Views\Productos\_Delete.cshtml" />
     <Content Include="Views\Productos\_ListaProducto.cshtml" />
     <Content Include="Views\OrdenEntradas\OrdenEntrada.cshtml" />
+    <Content Include="Views\OrdenEntradas\HistorialEntradas.cshtml" />
+    <Content Include="Views\OrdenEntradas\_Ordenes.cshtml" />
+    <Content Include="Views\OrdenEntradas\DetalleOrden.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
