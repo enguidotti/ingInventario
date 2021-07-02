@@ -25,12 +25,21 @@
     </div>
 </div>
 <link href="~/Content/plugins/daterangepicker.css" rel="stylesheet" />
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script src="~/Scripts/plugins/moment.min.js"></script>
 <script src="~/Scripts/plugins/daterangepicker.js"></script>
 <script>
     //daterangepicker sirve para seleccionar un rango de fechas
-    $('input[name="fechas"]').daterangepicker();
-
+    $('input[name="fechas"]').daterangepicker({
+        autoUpdateInput: false,
+        autoApply: true,
+        maxDate: moment(),
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    });
+    $('input[name="fechas"]').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('DD-MM-YYYY') + ' hasta ' + picker.endDate.format('DD-MM-YYYY'));
+    });
     $('#buscar').click(function () {
         //captura la fecha de inicio selecionada en el input
         let inicio = $('#fechas').data('daterangepicker').startDate.format('YYYY-MM-DD');

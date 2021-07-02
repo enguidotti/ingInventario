@@ -6,6 +6,7 @@
                 <th>Número Factura</th>
                 <th>Comentario</th>
                 <th>Usuario Ingreso</th>
+                <th>Fecha Ingreso</th>
                 <th></th>
             </tr>
         </thead>
@@ -16,10 +17,11 @@
                     <td>@item.num_factura</td>
                     <td>@item.comentario</td>
                     <td>@item.Usuario.nombre</td>
+                    <td>@item.fecha.ToShortDateString()</td>
                     <td style="white-space: nowrap">
                         <a href="@Url.Action("DetalleOrden","OrdenEntradas",new { id = item.id_orden })" target="_blank" class="btn btn-warning">
                             <i class="fa fa-list"></i>
-                        </a>                                            
+                        </a>
                     </td>
                 </tr>
             }
