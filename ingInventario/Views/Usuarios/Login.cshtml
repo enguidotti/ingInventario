@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+
+            <!-- Login Form -->
+            <form action="@Url.Action("Login")" method="post">
+                <input type="text" id="login" class="fadeIn second" name="email" placeholder="Email">
+                <input type="text" id="password" class="fadeIn third" name="pass" placeholder="Contraseña">
+                <input type="submit" class="fadeIn fourth" value="Ingresar">
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

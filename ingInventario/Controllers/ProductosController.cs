@@ -109,6 +109,6 @@ namespace ingInventario.Controllers
                 productos = productos.Where(p => p.id_proveedor == proveedor).ToList();
             }
             return PartialView("_ListaProducto", productos);
-        }
+        }        
     }
 }

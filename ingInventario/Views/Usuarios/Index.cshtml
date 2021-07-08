@@ -35,35 +35,43 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.pass)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_usuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_usuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_usuario })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pass)
+            </td>
+            <td>
+                @if (item.estado == 0)
+                {
+                    <span class="badge badge-primary">Activo</span>
+                }
+                @if (item.estado == 1)
+                {
+                    <span class="badge badge-warning">Inactivo</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_usuario }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_usuario }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_usuario })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\patterns\1.png" />
     <Content Include="Content\patterns\2.png" />
     <Content Include="Content\patterns\3.png" />
@@ -137,6 +138,7 @@
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\plugins\dataTables\dataTables.bootstrap4.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\daterangepicker.js" />
@@ -307,6 +309,9 @@
     <Content Include="Views\TipoUsuarios\Details.cshtml" />
     <Content Include="Views\TipoUsuarios\Edit.cshtml" />
     <Content Include="Views\TipoUsuarios\Index.cshtml" />
+    <Content Include="Views\Usuarios\Login.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_Menu2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

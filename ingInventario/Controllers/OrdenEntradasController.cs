@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ingInventario.Controllers
 {
+    [OutputCache(VaryByCustom = "*", Duration = 0)]
     public class OrdenEntradasController : Controller
     {
         private inventariodbEntities db = new inventariodbEntities();

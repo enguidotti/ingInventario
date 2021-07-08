@@ -10,10 +10,41 @@ using ingInventario.Models;
 
 namespace ingInventario.Controllers
 {
+
+    [OutputCache(VaryByCustom = "*", Duration = 0)]
     public class UsuariosController : Controller
     {
         private inventariodbEntities db = new inventariodbEntities();
 
+        //login
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string email, string pass)
+        {
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(pass))
+            {
+                var usuario = db.Usuario.FirstOrDefault(u => u.email.Equals(email) && u.pass.Equals(pass));
+                if (usuario != null)
+                {
+                    Session["usuario"] = usuario.nombre + " " + usuario.apellido;
+                    Session["tipoUsuario"] = usuario.TipoUsuario.nombre;
+                    Session["tipoUser"] = usuario.id_tipo;
+                    return RedirectToAction("OrdenEntrada", "OrdenEntradas");
+                }
+            }
+            return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
+        //fin login
         // GET: Usuarios
         public ActionResult Index()
         {

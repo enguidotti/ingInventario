@@ -3,6 +3,8 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <!--Inactividad de usario-->
+    <meta http-equiv="refresh" content="1800;url=../Usuario/Logout" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Inventario</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -20,77 +22,65 @@
     <script src="~/Scripts/plugins/pace/pace.min.js"></script>
 </head>
 <body>
-    <div id="wrapper">
-        <!--MENU-->
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav metismenu" id="side-menu">
-                    <li class="nav-header">
-                        <div class="profile-element">
-                            <a href="#">
-                                <span class="block m-t-xs font-bold">Usuario</span>
-                                <span class="text-muted text-xs block">Administrador </span>
-                            </a>
-                        </div>
-                        <div class="logo-element">
-                            SI
-                        </div>
-                    </li>
-                    <!--Agregar links al menú -->
-                    <li>
-                        <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Marcas</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "Marcas")">Crear Marca</a></li>
-                            <li><a href="@Url.Action("Index", "Marcas")">Lista Marcas</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-address-book"></i><span class="nav-label">Categorías</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "Categorias")">Crear Categoría</a></li>
-                            <li><a href="@Url.Action("Index", "Categorias")">Lista Categorías</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i><span class="nav-label">Productos</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "Productos")">Crear Producto</a></li>
-                            <li><a href="@Url.Action("Index","Productos")">Lista productos</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-list"></i><span class="nav-label">Orden Entrada</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("OrdenEntrada", "OrdenEntradas")">Ingresar Orden</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--FIN MENU-->
+    @if (Session["usuario"] != null)
+    {
 
-        <div id="page-wrapper" class="gray-bg">
-            <!--TOP NAVBAR-->
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    </div>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li style="padding:20px">
-                            <h3><strong>Sistema Inventario</strong></h3>
+        <div id="wrapper">
+            <!--MENU-->
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav metismenu" id="side-menu">
+                        <li class="nav-header">
+                            <div class="profile-element">
+                                <a href="#">
+                                    <span class="block m-t-xs font-bold">@Session["usuario"]</span>
+                                    <span class="text-muted text-xs block">@Session["tipoUsuario"]</span>
+                                </a>
+                            </div>
+                            <div class="logo-element">
+                                SI
+                            </div>
                         </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-sign-out"></i> Desconectarse
-                            </a>
-                        </li>
+                        @if (Session["tipoUser"].ToString() == "1")
+                        {
+                            @Html.Partial("_Menu")
+                        }
+                        else
+                        {
+                            @Html.Partial("_Menu2")
+                        }
                     </ul>
-                </nav>
+                </div>
+            </nav>
+            <!--FIN MENU-->
+
+            <div id="page-wrapper" class="gray-bg">
+                <!--TOP NAVBAR-->
+                <div class="row border-bottom">
+                    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                        <div class="navbar-header">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        </div>
+                        <ul class="nav navbar-top-links navbar-right">
+                            <li style="padding:20px">
+                                <h3><strong>Sistema Inventario</strong></h3>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Logout","Usuarios")">
+                                    <i class="fa fa-sign-out"></i> Desconectarse
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--FIN TOP NAVBAR-->
+                @RenderBody()
             </div>
-            <!--FIN TOP NAVBAR-->
-            @RenderBody()
         </div>
-    </div>
+    }
+    else
+    {
+        Response.Redirect("~/");
+    }
 </body>
 </html>
