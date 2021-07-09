@@ -27,6 +27,7 @@ namespace ingInventario.Models
     
         public virtual DbSet<Bodega> Bodega { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
+        public virtual DbSet<DatalleSalida> DatalleSalida { get; set; }
         public virtual DbSet<DetalleEntrada> DetalleEntrada { get; set; }
         public virtual DbSet<Marca> Marca { get; set; }
         public virtual DbSet<OrdenEntrada> OrdenEntrada { get; set; }
@@ -36,7 +37,6 @@ namespace ingInventario.Models
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
-        public virtual DbSet<DatalleSalida> DatalleSalida { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

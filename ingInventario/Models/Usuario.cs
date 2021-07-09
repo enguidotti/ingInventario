@@ -11,8 +11,7 @@ namespace ingInventario.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,28 +22,14 @@ namespace ingInventario.Models
             this.OrdenSalida1 = new HashSet<OrdenSalida>();
             this.Producto = new HashSet<Producto>();
         }
-        [Key]
+    
         public int id_usuario { get; set; }
-        [Required(ErrorMessage = "Debe ingresar nombre")]
-        [StringLength(50)]
-        [Display(Name ="Nombre")]
         public string nombre { get; set; }
-        [Required]
-        [Display(Name = "Apellido")]
         public string apellido { get; set; }
-        [Required]
-        [Display(Name = "Run")]
         public string rut { get; set; }
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Correo")]
         public string email { get; set; }
-        [Required]
-        [Display(Name = "Contraseña")]
         public string pass { get; set; }
         public int estado { get; set; }
-        [Required]
-        [Display(Name = "Tipo Usuario")]
         public int id_tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

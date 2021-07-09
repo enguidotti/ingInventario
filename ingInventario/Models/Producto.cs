@@ -37,8 +37,8 @@ namespace ingInventario.Models
         public virtual ICollection<DetalleEntrada> DetalleEntrada { get; set; }
         public virtual Marca Marca { get; set; }
         public virtual Proveedor Proveedor { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductoBodega> ProductoBodega { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }
