@@ -1,29 +1,29 @@
 ﻿<li class="@Html.IsSelected(controller:"Marcas")">
     <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Marcas</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
-        <li class="@Html.IsSelected(action:"Create")"><a href="@Url.Action("Create", "Marcas")">Crear Marca</a></li>
-        <li class="@Html.IsSelected(action:"Index")"><a href="@Url.Action("Index", "Marcas")">Lista Marcas</a></li>
+        <li class="@Html.IsSelected(action:"Create", controller:"Marcas")"><a href="@Url.Action("Create", "Marcas")">Crear Marca</a></li>
+        <li class="@Html.IsSelected(action:"Index", controller:"Marcas")"><a href="@Url.Action("Index", "Marcas")">Lista Marcas</a></li>
     </ul>
 </li>
 <li class="@Html.IsSelected(controller:"Categorias")">
     <a href="#"><i class="fa fa-address-book"></i><span class="nav-label">Categorías</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
-        <li class="@Html.IsSelected(action:"Create")"><a href="@Url.Action("Create", "Categorias")">Crear Categoría</a></li>
-        <li class="@Html.IsSelected(action:"Index")"><a href="@Url.Action("Index", "Categorias")">Lista Categorías</a></li>
+        <li class="@Html.IsSelected(action:"Create", controller:"Categorias")"><a href="@Url.Action("Create", "Categorias")">Crear Categoría</a></li>
+        <li class="@Html.IsSelected(action:"Index", controller:"Categorias")"><a href="@Url.Action("Index", "Categorias")">Lista Categorías</a></li>
     </ul>
 </li>
 <li class="@Html.IsSelected(controller:"Productos")">
     <a href="#"><i class="fa fa-shopping-cart"></i><span class="nav-label">Productos</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
-        <li class="@Html.IsSelected(action:"Create")"><a href="@Url.Action("Create", "Productos")">Crear Producto</a></li>
-        <li class="@Html.IsSelected(action:"Index")"><a href="@Url.Action("Index","Productos")">Lista productos</a></li>
+        <li class="@Html.IsSelected(action:"Create", controller:"Productos")"><a href="@Url.Action("Create", "Productos")">Crear Producto</a></li>
+        <li class="@Html.IsSelected(action:"Index",controller:"Productos")"><a href="@Url.Action("Index","Productos")">Lista productos</a></li>
     </ul>
 </li>
 <li class="@Html.IsSelected(controller:"Usuarios")">
     <a href="#"><i class="fa fa-users"></i><span class="nav-label">Usuarios</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
-        <li class="@Html.IsSelected(action:"Create")"><a href="@Url.Action("Create", "Usuarios")">Crear Usuarios</a></li>
-        <li class="@Html.IsSelected(action:"Index")"><a href="@Url.Action("Index","Usuarios")">Lista Usuarios</a></li>
+        <li class="@Html.IsSelected(action:"Create", controller:"Usuarios")"><a href="@Url.Action("Create", "Usuarios")">Crear Usuarios</a></li>
+        <li class="@Html.IsSelected(action:"Index", controller:"Usuarios")"><a href="@Url.Action("Index","Usuarios")">Lista Usuarios</a></li>
     </ul>
 </li>
 <li class="@Html.IsSelected(controller:"OrdenEntradas",action:"OrdenEntrada")">

@@ -32,7 +32,11 @@ namespace ingInventario.Controllers
                     Session["usuario"] = usuario.nombre + " " + usuario.apellido;
                     Session["tipoUsuario"] = usuario.TipoUsuario.nombre;
                     Session["tipoUser"] = usuario.id_tipo;
-                    return RedirectToAction("OrdenEntrada", "OrdenEntradas");
+                    return RedirectToAction("Home", "Home");
+                }
+                else
+                {
+                    ViewBag.error = "Los datos son incorrectos";
                 }
             }
             return View();

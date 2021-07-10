@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Dashboard</h2>
+
+<div class="col-3">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <div class="ibox-tools">
+                <span class="label label-success float-right">Mensual</span>
+            </div>
+            <h5>Histrial Ordenes</h5>
+        </div>
+        <div class="ibox-content">
+            <h1 class="no-margins"> @ViewBag.ordenes </h1>
+            <div class="stat-percent font-bold text-success"> @ViewBag.totalProductos <i class="fa fa-bolt"></i></div>
+            <small>Total Ingresos</small>
+        </div>
+    </div>
+</div>
+<div class="col-3">
+    <div class="ibox">
+        <div class="ibox-title">
+            <div class="ibox-tools">
+                <span class="label label-success float-right">Mensual</span>
+            </div>
+            <h5>Histrial Ordenes</h5>
+        </div>
+        <div class="ibox-content">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/chart.min.js"></script>
+<script>
+    //se tranforma el viewbag en json
+    const datos = @Html.Raw(Json.Encode(@ViewBag.productos));
+    let nombres = []; //variable para capturar los nombres del viewbag
+    let cantidad = [];//variable para capturar las catidades del viewbag
+    //for para asignar los elementos a sus arreglos
+    for (var i = 0; i < datos.length; i++) {
+        nombres.push(datos[i].nombre);//push permite añadir elementos a un array
+        cantidad.push(datos[i].cantidad);
+    }
+    //construcción del gráfico
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: nombres,
+            datasets: [{
+                label: 'Productos',
+                data: cantidad,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 4
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
